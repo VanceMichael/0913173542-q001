@@ -4,7 +4,7 @@ COPY go.mod .
 RUN go mod download
 COPY . .
 RUN CGO_ENABLED=0 go build -o /race-review .
-FROM gcr.io/distroless/static-debian12
+FROM alpine:3.21
 COPY --from=build /race-review /race-review
 VOLUME ["/data"]
 EXPOSE 8080
